@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const passport = require("passport");
-const session = require("express-session");
+// const session = require("express-session");
 // const MongoStore = require("connect-mongo")(session);
 const flash = require("express-flash");
 const logger = require("morgan");
@@ -45,12 +45,15 @@ app.use(methodOverride("_method"));
 // );
 
 // Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
+})
 //Setup Routes For Which The Server Is Listening
 
 //Server Running
