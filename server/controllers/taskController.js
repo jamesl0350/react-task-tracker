@@ -39,7 +39,7 @@ const createTask = async (req, res, next) => {
 
     if (!title) {
       res.status(400);
-      thorw new Error('Please add a title');
+      throw new Error('Please add a title');
     }
 
     const task = await Task.create({
@@ -91,7 +91,7 @@ const deleteTask = async (req, res, next) => {
       res.status(404);
       throw new Error('Task not found');
     }
-    
+
     await task.deleteOne();
 
     res.status(200).json({ id: req.params.id });
