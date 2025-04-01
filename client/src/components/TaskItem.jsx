@@ -65,8 +65,31 @@ function TaskForm({ task, onSubmit, buttonText = 'Save'}) {
       </div>
 
       <div className="form-group">
-
+        <label htmlFor="status">Status</label>
+        <select
+          name="status"
+          id="status"
+          value={formData.status}
+          onChange={handleChange}
+        >
+          <option value="pending">Pending</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
       </div>
+
+      <div className="form-group">
+        <label htmlFor="dueDate">Due Date</label>
+        <input
+          type="text"
+          id="dueDate"
+          name="dueDate"
+          value={formData.dueDate}
+          onChange={handleChange}
+        />
+      </div>
+
+
     </form>
   )
 }
