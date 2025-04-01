@@ -38,5 +38,35 @@ function TaskForm({ task, onSubmit, buttonText = 'Save'}) {
     e.preventDefault();
     onSubmit(formData);
   };
+  
+  return (
+  <form onSubmit={handleSubmit} className="task-form">
+      <div className="form-group">
+        <label htmlFor="title">Title</label>
+        <input 
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          value={formData.description}
+          onChange={handleChange}
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div className="form-group">
+
+      </div>
+    </form>
+  )
 }
