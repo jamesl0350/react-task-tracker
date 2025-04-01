@@ -89,7 +89,25 @@ function TaskForm({ task, onSubmit, buttonText = 'Save'}) {
         />
       </div>
 
+      <div className="form-group">
+        <label htmlFor="priority">Priority</label>
+        <select
+          name="priority"
+          id="priority"
+          value={formData.priority}
+          onChange={handleChange}
+        >
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
 
+      <button type="submit" className="btn btn-primary">
+        {buttonText}
+      </button>
     </form>
-  )
+  );
 }
+
+export default TaskForm;
