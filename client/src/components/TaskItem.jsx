@@ -1,113 +1,64 @@
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function TaskForm({ task, onSubmit, buttonText = 'Save'}) {
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    status: 'pending',
-    dueDate: '',
-    priority: 'medium',
-  });
-
-  useEffect(() => {
-    if (task) {
-      // Format the form date for the date input
-      const formattedDate = task.dueDate
-        ? new Date(task.dueDate).toISOString().split('T')[0]
-        : '';
-
-      setFormData({
-        title: task.title || '',
-        description: task.description || '',
-        status: task.status || 'pending',
-        dueDate: formattedDate,
-        priority: task.priority || 'medium',
-      });
+function TaskItem({ task, onDelete }) {
+  const getStatusClass = (status) => {
+    switch (status){
+      case 'completed':
+        return 'status-completed';
+      case 'in-progress':
+        return 'status-in-progress';
+      default:
+        return 'status-pending';
     }
-  }, [task]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
+  const getPriorityClass = (priority) => {
+    switch (priority){
+      case 'high':
+        return 'priority-high';
+      case 'low':
+        return 'priority-low';
+      default:
+        return 'priority-medium';
+    }
   };
-  
+
+  // Format date
+  const formatDate = (dateString) => {
+    if (!dateString) return 'No due date';
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   return (
-  <form onSubmit={handleSubmit} className="task-form">
-      <div className="form-group">
-        <label htmlFor="title">Title</label>
-        <input 
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
+    <div className="task-item">
+      <div className="task-content">
+        <h3>
+          <Link to={`/tasks/${task._id}`}>{task.title}</Link>
+        </h3>
+        <p className="task-description">
+          {task.description || 'No task description provided'}
+        </p>
+        <div className="task-meta">
+          <span className={`tasks-status ${getStatusClass(task.status)}`}>
+            {task.status}
+          </span>
+          <span className={`task-priority ${getPriorityClass(task.priority)}`}>
+            {task.priority}
+          </span>
+          <span className="task-date">Due: {formatDate(task.dueDate)}</span>
+        </div>
       </div>
-
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
-        <textarea
-          name="description"
-          id="description"
-          value={formData.description}
-          onChange={handleChange}
-          rows="3"
-        ></textarea>
+      <div className="task-actions">
+        <Link to={`/tasks/${task._id}`} className="btn btn-small">
+          View
+        </Link>
+        <button onClick={() => onDelete(task._id)} className="btn btn-small btn-danger">
+          Delete
+        </button>
       </div>
-
-      <div className="form-group">
-        <label htmlFor="status">Status</label>
-        <select
-          name="status"
-          id="status"
-          value={formData.status}
-          onChange={handleChange}
-        >
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="dueDate">Due Date</label>
-        <input
-          type="text"
-          id="dueDate"
-          name="dueDate"
-          value={formData.dueDate}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="priority">Priority</label>
-        <select
-          name="priority"
-          id="priority"
-          value={formData.priority}
-          onChange={handleChange}
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
-
-      <button type="submit" className="btn btn-primary">
-        {buttonText}
-      </button>
-    </form>
+    </div>
   );
 }
 
-export default TaskForm;
+export default TaskItem;
