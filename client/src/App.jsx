@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Dashboard from './components/Dashboard';
+import Dashboard from './views/Dashboard';
 import TaskList from './views/TaskList';
 import TaskDetails from './views/TaskDetails';
 import NotFound from './views/NotFound';

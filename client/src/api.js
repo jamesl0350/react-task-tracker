@@ -1,4 +1,4 @@
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 const API_URL = `${PORT}`;
 
 // Get all tasks
@@ -29,7 +29,7 @@ export const getTask = async (id) => {
 export const createTask = async (taskData) => {
   const res = await fetch(`${API_URL}/tasks`, {
     method: 'POST',
-    header: {
+    headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(taskData),
@@ -47,7 +47,7 @@ export const createTask = async (taskData) => {
 export const updateTask = async (id, taskData) => {
   const res = await fetch(`${API_URL}/tasks${id}`, {
     method: 'PUT',
-    header: {
+    headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(taskData),

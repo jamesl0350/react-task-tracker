@@ -1,8 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/database');
-const {errorHandler } = require('./middleware/errorHandler');
-const taskRoutes = require('./routes/taskRoutes');
+import express from 'express';
+import cors from 'cors';
+import connectDB from './config/db.js';
+import {errorHandler } from './middleware/errorHandler.js';
+import taskRoutes from './routes/taskRoutes.js';
+import dotenv from 'dotenv'
+
+// Use .env file in config folder
+dotenv.config({path: './config/.env'});
 
 // Initialize express app
 const app = express();

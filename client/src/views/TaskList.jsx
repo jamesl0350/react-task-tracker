@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getTasks, deleteTask } from '../api';
-import TaskItem from '../components/Taskitem';
+import TaskItem from '../components/TaskItem';
 
 function TaskList() {
   const [tasks, setTasks] = useState([]);

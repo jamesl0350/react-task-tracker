@@ -7,7 +7,7 @@ import { createTask, deleteTask } from '../api';
 
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading ] = useSate(true);
+  const [isLoading, setIsLoading ] = useState(true);
   const [error, setError ] = useState(null);
 
   // Fetch tasks on component mount
@@ -32,7 +32,7 @@ function Dashboard() {
   const handleCreateTask = async (taskData) => {
     try {
       const newTask = await createTask(taskData);
-      setTaks([newTask, ...tasks])
+      setTasks([newTask, ...tasks]);
     } catch (err) {
       setError('Failed to create task');
       console.error(err)
