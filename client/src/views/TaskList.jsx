@@ -26,16 +26,6 @@ function TaskList() {
     }
   };
 
-  const handleCreateTask = async (taskData) => {
-    try {
-      const newTask = await createTask(taskData);
-      setTasks([newTask, ...tasks]);
-    } catch (err) {
-      setError('Failed to create task')
-      console.error(err);
-    }
-  };
-
   const handleDeleteTask = async (id) => {
     try {
       await deleteTask(id);
